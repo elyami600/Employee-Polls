@@ -7,24 +7,38 @@ import {
 } from "./_DATA";
 
 describe("./_DATA",() => {
-    it('will display a success message if all dates or fiels are saved correctly', async() => {  
+    //For the _DATA.js file, write an async unit test for _saveQuestion to verify that the saved question 
+    //is returned and all expected fields are populated when correctly formatted data is passed to the function.
+    it('will return and all expected fields are populated when correctly formatted data is passed to the function', async() => {  
         var optionOneText = "optionOneText";
         var optionTwoText = "optioneTwoText"
         var author =  'author';
         var result_Obj = await _saveQuestion( { optionOneText, optionTwoText, author } );
         //toHaveProperty(keyPath): Checks if the object has a property at the given key path.
-        expect(result_Obj).toHaveProperty('id');
-        expect(result_Obj).toHaveProperty('author');
-        expect(result_Obj).toHaveProperty('optionOne');
-        expect(result_Obj).toHaveProperty('optionTwo');
-        expect(result_Obj.optionOne).toHaveProperty('votes');
-        expect(result_Obj.optionOne).toHaveProperty('text');
-        expect(result_Obj.optionTwo).toHaveProperty('votes');
-        expect(result_Obj.optionTwo).toHaveProperty('text');
+       // https://stackoverflow.com/questions/72219389/jest-expect-object-not-to-have-property
+        const questionsProperties = ['id', 'author', 'optionOne', 'optionTwo'];
+        questionsProperties .forEach((prop) => {
+            expect(result_Obj).toHaveProperty(prop);
+        });
+        const questionsPropertiesNested = ['votes', 'text'];
+        questionsPropertiesNested.forEach((prop) => {
+            expect(result_Obj.optionOne).toHaveProperty(prop);
+            expect(result_Obj.optionTwo).toHaveProperty(prop);
+        });
+
+        // expect(result_Obj).toHaveProperty('id');
+        // expect(result_Obj).toHaveProperty('author');
+        // expect(result_Obj).toHaveProperty('optionOne');
+        // expect(result_Obj).toHaveProperty('optionTwo');
+        // expect(result_Obj.optionOne).toHaveProperty('votes');
+        // expect(result_Obj.optionOne).toHaveProperty('text');
+        // expect(result_Obj.optionTwo).toHaveProperty('votes');
+        // expect(result_Obj.optionTwo).toHaveProperty('text');
         
     })
-
-    it('will return an error if the date is not passed  _saveQuestin correct', async() => {
+    // For the _DATA.js file, write an async unit test for _saveQuestion to
+    // verify that an error is returned if incorrect data is passed to the function.
+    it('an error is returned if incorrect data is passed to the function.', async() => {
             var optionOneText = "optionOneText";
             var optionTwoText = "optioneTwoText"
             var author =  'author';
@@ -32,14 +46,18 @@ describe("./_DATA",() => {
             await expect(_saveQuestion({ author })).rejects.toEqual("Please provide optionOneText, optionTwoText, and author")
     })
 
-    it('will return the user if the id is found', async() => {
+    // For the _DATA.js file, write an async unit test for _saveQuestionAnswer to verify that the saved question answer is 
+    // returned and all expected fields are populated when correctly formatted data is passed to the function.
+    it('it returns and all expected fields are populated when correctly formatted data is passed to the function', async() => {
         var authedUser ='mtsamis'
         var qid = 'xj352vofupe1dqz9emx13r';
         var answer = 'optionOne'
         await expect(_saveQuestionAnswer({ authedUser, qid , answer })).resolves.toBe(true);
         await expect(_saveQuestionAnswer({ authedUser, qid , answer })).toBeTruthy();
     })
-    it('the fetch fails with an error', async () => {
+    // For the _DATA.js file, write an async unit test for _saveQuestionAnswer
+    // to verify that an error is returned if incorrect data is passed to the function.
+    it('an error is returned if incorrect data is passed to the function.', async () => {
         var authedUser ='mtsamis'
         var qid = 'xj352vofupe1dqz9emx13r';
         var answer = 'optionOne'
