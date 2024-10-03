@@ -65,18 +65,3 @@ export function receiveQuestions(questions) {
     }
 
   }
-
-  export function handleAddAnswer(qid, answer) {
-    return (dispatch, getState) => {
-        const { authedUser } = getState();
-
-        dispatch(showLoading());
-
-        return saveQuestionAnswer(authedUser, qid, answer)
-        .then(() => {
-            dispatch(addAnswer(authedUser, qid, answer));
-            dispatch(addAnswerUser(authedUser, qid, answer));
-        })
-        .then(() => dispatch(hideLoading()));
-    };
-}
