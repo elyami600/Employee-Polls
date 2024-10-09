@@ -23,8 +23,8 @@ export default function users(state = {}, action) {
                     ...state[action.authedUser],
                     answers: {
                         ...state[action.authedUser].answers,
-                        [action.qid]: action.answer
-                    }
+                        [action.qid]: action.answer,
+                    },
                 }
             };
         default:
