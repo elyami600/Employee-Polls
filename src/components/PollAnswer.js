@@ -1,6 +1,7 @@
-import { connect } from "react-redux"
 
+import { connect } from "react-redux"
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { handleAddQuestionAnswer } from "../actions/questions";
 
 const withRouter = (Component) => {
     const ComponentWithRouterProp = (props) => {
@@ -14,15 +15,32 @@ const withRouter = (Component) => {
   };
 
 
-
-
 const PollAnswer = (props) => {
+  //const navigate = useNavigate()
+  
   console.log("Poll answer ", props)
 //const { name, avatar, optionOneText , optionTwoText } = props
-  const question = props.questions[props.id];
-  const avatar = props.users[props.questions[props.id].author].avatarURL
-  const name  = props.users[props.questions[props.id].author].name
+  const { dispatch, id, users, questions } = props;
+  const question = questions[id];
+  const avatar   = users[question.author].avatarURL
+  const name     = users[question.author].name
 
+  const handleOptioneOne = (e) => {
+    e.preventDefault()
+    dispatch(handleAddQuestionAnswer(id, "optionOne"));
+     console.log("hanldeOptionOne", id, "optionOne",)
+   
+  }
+
+  const handleOptioneTwo = (e) => {
+    e.preventDefault()
+    dispatch(handleAddQuestionAnswer(id, "optionTwo"))
+  }
+
+  // const handleBackHome = (e) => {
+  //   e.preventDefault();
+  //   navigate("/");
+  // };
 
   return (
     <div className="center">
@@ -32,11 +50,11 @@ const PollAnswer = (props) => {
         <h1>Would You Rather </h1>
           <div>
             <h3>{question.optionOne.text} </h3>
-          <button >Click</button>   
+            <button onClick={handleOptioneOne}>Click</button>   
           </div>
           <div>
             <h3>{question.optionTwo.text} </h3>
-          <button>Click</button>   
+            <button onClick={handleOptioneTwo}>Click</button>   
           </div>
       </div>
 </div>
