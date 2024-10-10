@@ -1,11 +1,9 @@
-import { saveQuestion , saveQuestionAnswer } from "../utils/api";
-import {addUserAnswer,addUserQuestion } from "./users";
-
+import { saveQuestion, saveQuestionAnswer } from "../utils/api";
+import { addUserAnswer, addUserQuestion } from "./users";
 
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS"
 export const ADD_QUESTION      = "ADD_QUESTION"
 export const ADD_QUESTION_ANSWER = "ADD_QUESTION_ANSWER"
-
 
 export function receiveQuestions(questions) {
     return {
@@ -13,49 +11,50 @@ export function receiveQuestions(questions) {
       questions,
     };
   }
-// add question
-export function addQuestion({ id, authedUser, answer }) {
+
+export function addQuestion(question) {
   return {
     type: ADD_QUESTION,
-    id,
-    authedUser,
-    answer
+    question,
   }
 
 }
-
-export function handleAddQuestion(optionOne, optionTwo) {
+export function handleAddQuestion(optionOne,optionTwo) {
   return (dispatch, getState) => {
     const { authedUser } = getState();
-    const question = { optionOne, optionTwo, authedUser }
-    dispatch(addQuestion(question));
+    const question = {
+      optionOneText: optionOne,
+      optionTwoText: optionTwo,
+      author: authedUser,
+    };
   
-    return saveQuestion(question).catch((e) => {
-      console.warn("Error in handleAddQuestion" ,e);
-      dispatch(addQuestion(question));
-      dispatch(addUserQuestion(question))
-      alert('There was an error saving the guestion. Try againg')
-    })
-
-  }
-
+  
+   // dispatch(showLoading());
+    return saveQuestion(question)
+      .then((question) => {
+          dispatch(addQuestion(question));
+          dispatch(addUserQuestion({
+              qid: question.id,
+              author: question.author,
+          }));
+      })
+      //.then(() => dispatch(hideLoading()));;
+  };
 }
-// -------------------save the answe fun -------------------------//
 export function addQuestionAnswer(authedUser, qid, answer) {
   return {
     type: ADD_QUESTION_ANSWER,
     authedUser,
     qid, 
-      answer
+    answer
   }
 }
-
 
 export function handleAddQuestionAnswer(qid, answer) {
   return (dispatch, getState) => {
     const { authedUser } = getState();
     // dispatch(showLoading());
-    
+
     return saveQuestionAnswer({ authedUser, qid, answer })
     .then(() => {
       dispatch(addQuestionAnswer(authedUser, qid, answer))
