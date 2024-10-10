@@ -70,7 +70,7 @@ const PollAnswer = (props) => {
         ) : (
           <div className="bar_percent">
             <br></br>
-            <br></br>
+            
             <h1>You already voted</h1>
            
           </div> 
