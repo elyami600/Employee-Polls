@@ -5,8 +5,7 @@ import { handleAddQuestion } from "../actions/questions";
 
 
 
-const NewQuestion = ({ dispatch , authedUser ,id }) => {
-    //console.log("NewQuestion dispatch", dispatch , "id",id)
+const NewQuestion = ({ dispatch, id }) => {
 
     const [optionOne, setOptionOne] = useState('')
     const [optionTwo, setOptionTwo] = useState('')
@@ -23,8 +22,6 @@ const NewQuestion = ({ dispatch , authedUser ,id }) => {
         const optionTwo = e.target.value;
         setOptionTwo(optionTwo) 
     }
-    console.log('OPTION ONE:', optionOne);
-    console.log('OPTION TWO:', optionTwo);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -33,9 +30,9 @@ const NewQuestion = ({ dispatch , authedUser ,id }) => {
         setOptionOne("");
         setOptionTwo("");
 
-        // if(!id) {
-        //     navigate("/")
-        //  }
+        if(!id) {
+            navigate("/")
+         }
     }
 
     return (
@@ -52,6 +49,7 @@ const NewQuestion = ({ dispatch , authedUser ,id }) => {
                     value={optionOne}
                     onChange={handleOptionOne}
                 />
+                <br />
                 <label>Second Option</label>
                 <br />
                 <input
