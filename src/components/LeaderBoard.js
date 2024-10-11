@@ -3,17 +3,13 @@ import { connect } from "react-redux"
 
 
 
-const LeaderBoard = (props) => {
-    console.log("LeaderBoard props ", props.questionsIds)
+const LeaderBoard = ({ users }) => {
+    console.log("LeaderBoard props ", users)
     
-    const uniqueArray = [...new Set(props.questionsIds)]; 
-
-   
-
-      
       return (
-        <div className="center">
-            <table className="dashboard-list">
+        <div id="customers">
+            <h3 className="center">Leaderboard</h3>
+            <table>
             <thead>
                 <tr>
                 <th>Name</th>
@@ -22,12 +18,12 @@ const LeaderBoard = (props) => {
                 </tr>
             </thead>
             <tbody>
-                {uniqueArray.map(row => (
-                <tr key={row}>
+                {users.map(user => (
+                <tr key={user.id}> 
+                    <td><img src={user.avatarURL}  alt={`Avar of ${user.name}`}className="avatar" /> {user.name}</td>
+                     <td>{Object.values(user.answers).length}</td>
+                     <td>{user.questions.length}</td>
                     
-                    <td><img src={props.users[props.questions[row].author].avatarURL} alt={`Avar of ${props.users[props.questions[row].author].name}`} className="avatar" /> {props.users[props.questions[row].author].name}  ({props.questions[row].author})</td>
-                    <td> {props.questions[row].optionOne.votes.length + props.questions[row].optionTwo.votes.length} </td>
-                    <td> {props.users[props.questions[row].author].questions.length} </td>
                 </tr>
                 ))}
             </tbody>
@@ -35,19 +31,13 @@ const LeaderBoard = (props) => {
         </div>
       );
 }
-const mapStateToProps = ({authedUser, users, questions }) => {
-    
+const mapStateToProps = ({ users }) => {
 
     return {
-        authedUser,
-        users,
-        questions,
-        questionsIds:[... new Set(Object.keys(questions).sort(
-            (a, b) => questions[b].timestamp - questions[a].timestamp
-          ),)]
-       
+        users : Object.values(users).sort((a,b) => 
+             Object.values(b.answers).length - Object.values(a.answers).length),
+    
     }
-
 }
 
 export default connect(mapStateToProps)(LeaderBoard)
