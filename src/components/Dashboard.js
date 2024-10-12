@@ -1,12 +1,16 @@
 import { connect } from "react-redux";
+import Question from "./Question";
 
 const Dashboard = (props) => {
     console.log("Dashboard props ", props)
     return (
       <div>
-        <ul>
+        <h3 className="center">New Questions</h3>
+        <ul className="dashboard-list">
             {props.questionsIds.map((id) =>(
-                <li key={id}>Questions ID : {id}</li>
+                <li key={id}>
+                  <Question id={id}/>
+                </li>
             ))}
         </ul>
       </div>
