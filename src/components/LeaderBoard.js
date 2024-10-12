@@ -1,8 +1,5 @@
 import { connect } from "react-redux"
 
-
-
-
 const LeaderBoard = ({ users }) => {
     console.log("LeaderBoard props ", users)
     
@@ -23,7 +20,6 @@ const LeaderBoard = ({ users }) => {
                     <td><img src={user.avatarURL}  alt={`Avar of ${user.name}`}className="avatar" /> {user.name}</td>
                      <td>{Object.values(user.answers).length}</td>
                      <td>{user.questions.length}</td>
-                    
                 </tr>
                 ))}
             </tbody>
@@ -34,9 +30,9 @@ const LeaderBoard = ({ users }) => {
 const mapStateToProps = ({ users }) => {
 
     return {
-        users : Object.values(users).sort((a,b) => 
-             Object.values(b.answers).length - Object.values(a.answers).length),
-    
+        users: Object.values(users).sort((a,b) => 
+            Object.values(b.answers).length - Object.values(a.answers).length),
+
     }
 }
 
