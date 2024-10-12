@@ -11,7 +11,7 @@ const Nav = () => {
                 <Link to="/leaderdoard">Leaderdboard</Link>
                 </li>
                 <li>
-                <Link to="/newquestion">New Question</Link>
+                <Link to="/add">New Question</Link>
                 </li>
                 <li>
                 <Link to="/login">Loging</Link>
