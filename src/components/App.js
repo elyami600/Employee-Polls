@@ -8,7 +8,7 @@ import { Routes, Route } from "react-router";
 import NewQuestion from "./NewQuestion";
 import LeaderBoard from "./LeaderBoard";
 import NotFound from "./404page"
-import Login from "./Login";
+import Login from './Login'
 import PollAnswer from "./PollAnswer";
 
 
@@ -28,12 +28,12 @@ const App = (props) => {
         {
         props.loading === true ? null : (
           <Routes>
-             <Route path="/" exact element={<Dashboard/>}/>
+             <Route path="/"       exact element={<Dashboard/>}/>
              <Route path="/question/:id" element={<PollAnswer/>}/>
-             <Route path="/leaderdoard" element={<LeaderBoard/>}/>
-             <Route path="/add" element={<NewQuestion/>}/>
-             <Route path="/login" element={<Login/>}/>
-             <Route path="*" element={<NotFound/>} />
+             <Route path="/leaderdoard"  element={<LeaderBoard/>}/>
+             <Route path="/add"          element={<NewQuestion/>}/>
+             <Route path="/login"        element={<Login/>}/>
+             <Route path="*"             element={<NotFound/>} />
           </Routes>
         )}
       </Fragment>
