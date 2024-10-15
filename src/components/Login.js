@@ -57,7 +57,7 @@ const LogingPage = ({  dispatch , users , loggedIn}) => {
                 <div>
                     <label>username:</label>
                     <input
-                        data-testid="email-input"
+                        data-testid="username-input"
                         type="text"
                         placeholder="username..."
                         value={username}
@@ -67,19 +67,14 @@ const LogingPage = ({  dispatch , users , loggedIn}) => {
                 <div>
                     <label>password:</label>
                     <input
-                        data-testid="email-input"
+                        data-testid="password-input"
                         type="password"
                         placeholder="password..."
                         value={password}
                         onChange={handlePassword}
                     />
                 </div>
-                <button className="btn" type="submit" disabled={username === "" && password === ""}>Submit</button>
-                {/* <input
-                    data-testid="submit-button"
-                    type="submit"
-                    value="Submit"
-                /> */}
+                <button data-testid="submit-button"  className="btn" type="submit" disabled={username === "" && password === ""}>Submit</button>
             </form>
             
         </div>
