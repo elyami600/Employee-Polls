@@ -59,7 +59,7 @@ const NewQuestion = ({ dispatch, id }) => {
                     value={optionTwo}
                     onChange={handleOptionTwo}
                 />
-                <button className="btn" type="submit" disabled={optionOne === "" && optionTwo === ""}>Submit</button>
+                <button data-testid="submit-button" className="btn" type="submit" disabled={optionOne === "" && optionTwo === ""}>Submit</button>
             </form>
         </div>
     )
