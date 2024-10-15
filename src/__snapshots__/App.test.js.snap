@@ -29,9 +29,16 @@ Object {
             </li>
             <li>
               <a
-                href="/new"
+                href="/add"
               >
                 New Question
+              </a>
+            </li>
+            <li>
+              <a
+                href="/login"
+              >
+                Loging
               </a>
             </li>
           </ul>
@@ -64,9 +71,16 @@ Object {
           </li>
           <li>
             <a
-              href="/new"
+              href="/add"
             >
               New Question
+            </a>
+          </li>
+          <li>
+            <a
+              href="/login"
+            >
+              Loging
             </a>
           </li>
         </ul>
