@@ -4,7 +4,7 @@ import Question from "./Question";
 const Dashboard = (props) => {
     console.log("Dashboard props ", props)
     return (
-      <div>
+      <div className="card-grid">
         <h3 className="center">New Questions</h3>
         <ul className="dashboard-list">
             {props.questionsIds.map((id) =>(

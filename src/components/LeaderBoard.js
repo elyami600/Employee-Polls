@@ -6,7 +6,7 @@ const LeaderBoard = ({ users }) => {
       return (
         <div id="customers">
             <h3 className="center">Leaderboard</h3>
-            <table>
+            <table  className="table_center">
             <thead>
                 <tr>
                 <th>Name</th>

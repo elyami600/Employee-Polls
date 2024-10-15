@@ -1,13 +1,14 @@
 import { connect } from "react-redux"
 import { formatDate, formatQuestion } from "../utils/helper"
 import { useNavigate } from "react-router"
+import NotFound from "./404page"
 
 
 const Questions = (props) => {
     const navigate = useNavigate();
     
     if(props.questions === null) {
-        return <div>This question doesn't exist.</div>
+        return <NotFound/>
     }
     console.log("Questions props ", props)
     const {id, name, avatar, timestamp } = props.question

@@ -68,18 +68,18 @@ const LogingPage = ({  dispatch , users , loggedIn}) => {
                     <label>password:</label>
                     <input
                         data-testid="email-input"
-                        type="text"
-                       // type="password"
+                        type="password"
                         placeholder="password..."
                         value={password}
                         onChange={handlePassword}
                     />
                 </div>
-                <input
+                <button className="btn" type="submit" disabled={username === "" && password === ""}>Submit</button>
+                {/* <input
                     data-testid="submit-button"
                     type="submit"
                     value="Submit"
-                />
+                /> */}
             </form>
             
         </div>

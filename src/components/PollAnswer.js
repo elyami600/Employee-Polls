@@ -71,18 +71,19 @@ const PollAnswer = (props) => {
           </div> 
         ) : (
           <div>
+             <h1>You Already Voted</h1>
             <div className="progress-bar">
               <div className="progress-bar-completed" style={{ width: `${optionOnePercentMax}%` }}>
-              <span id="progress-bar-label" className="visually-hidden">Votes: {optionOnePercent}%</span>
+              <span id="progress-bar-label" className="visually-hidden">Votes: {optionOnePercentMax}%</span>
               </div>
             </div>
             <br></br>
             <div className="progress-bar">
               <div className="progress-bar-completed1" style={{ width: `${optionTwoPercentMin}%` }}>
-              <span id="progress-bar-label" className="visually-hidden">Votes:  {optionTwoPercent}%</span>
+              <span id="progress-bar-label" className="visually-hidden">Votes:  {optionTwoPercentMin}%</span>
               </div>
             </div>
-            <h1>You Already Voted</h1>
+           
           </div>
 
           
