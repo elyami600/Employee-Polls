@@ -141,4 +141,68 @@ li {
   color: #c3392a;
 }
 
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  
+}
 
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  color-interpolation-filters: linearRGB;
+  
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: darkslategray;
+  color: white;
+}
+
+input[type=text] {
+font-size: 14px;
+border-radius: 6px;
+line-height: 1.5;
+padding: 5px 10px;
+transition: box-shadow 100ms ease-in, border 100ms ease-in, background-color 100ms ease-in;
+border: 2px solid #dee1e2;
+color: rgb(14, 14, 16);
+background: #dee1e2;
+display: block;
+height: 36px;
+}
+
+input[type=text] :hover {
+    border-color: #ccc;
+}
+input[type=text] :focus{
+    border-color: #9147ff;
+    background: #fff;
+}
+
+
+.progress-bar {
+  width: 25%;
+  background-color: #eee;
+}
+
+.progress-bar-completed {
+  height: px;
+  background-color: rgb(245, 255, 47);
+  transition: width 0.5s ease-in-out;
+}

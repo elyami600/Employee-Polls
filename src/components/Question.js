@@ -1,18 +1,25 @@
 import { connect } from "react-redux"
 import { formatDate, formatQuestion } from "../utils/helper"
+import { useNavigate } from "react-router"
 
 
 const Questions = (props) => {
+    const navigate = useNavigate();
+    
+    if(props.questions === null) {
+        return <div>This question doesn't exist.</div>
+    }
     console.log("Questions props ", props)
     const {id, name, avatar, timestamp } = props.question
 
     const toParent = (e, id) => {
         e.preventDefault();
+        navigate(`/question/${id}`);
         
     }
     return (
         <div className="question">
-            <img src={avatar} alt={`${name}`} className="avatar" />
+            <img src={avatar} alt={`Avar of ${name}`} className="avatar" />
             <div className="question-info">
                 <div>
                     <span>{name}</span>

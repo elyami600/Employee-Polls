@@ -17,10 +17,8 @@ const withRouter = (Component) => {
 
 
 const PollAnswer = (props) => {
-  //const navigate = useNavigate()
-  
   console.log("Poll answer ", props)
-//const { name, avatar, optionOneText , optionTwoText } = props
+
   const { dispatch, id, users,authedUser, questions } = props;
   const question = questions[id];
   const avatar   = users[question.author].avatarURL
@@ -29,25 +27,20 @@ const PollAnswer = (props) => {
   const voteOptioneOne = questions[id].optionOne.votes.includes(authedUser)
   const voteOptioneTwo = questions[id].optionTwo.votes.includes(authedUser)
   const hasVoted = voteOptioneOne || voteOptioneTwo;
-  console.log("voteOptioneOne" ,  voteOptioneOne)
-  console.log("voteOptioneTwo" ,  voteOptioneTwo)
+  
+  // const percentage = (value / total) * 100;
+  // const value = Math.floor(Math.random() * 100);
+
 
   const handleOptioneOne = (e) => {
     e.preventDefault()
     dispatch(handleAddQuestionAnswer(id, "optionOne"));
-    //navigate("/leaderdoard");
   }
 
   const handleOptioneTwo = (e) => {
     e.preventDefault()
     dispatch(handleAddQuestionAnswer(id, "optionTwo"))
-   // navigate("/");
   }
-
-  // const handleBackHome = (e) => {
-  //   e.preventDefault();
-  //   
-  // };
 
   return (
     <div className="center">
@@ -68,12 +61,14 @@ const PollAnswer = (props) => {
 
           </div> 
         ) : (
-          <div className="bar_percent">
-            <br></br>
-            
-            <h1>You already voted</h1>
-           
-          </div> 
+          <div>
+           <div className="progress-bar">
+              <div className="progress-bar-completed" style={{ width: `${(4 / 8) * 100}%` }}>
+              </div>
+          </div>
+          </div>
+
+          
         )}
         
       </div>
@@ -84,11 +79,6 @@ const PollAnswer = (props) => {
 const mapStateToProps = ({ authedUser, users, questions,}, props) => {
   const { id }= props.router.params;
  
-  // const name  = users[questions[id].author].name
-  // const avatar = users[questions[id].author].avatarURL
-  // const optionOneText = questions[id].optionOne.text
-  // const optionTwoText = questions[id].optionTwo.text
-
   return {
     id,
     users,

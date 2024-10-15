@@ -1,18 +1,19 @@
 import { useState } from "react";
 import { connect } from "react-redux";
 import { setAuthedUser } from "../actions/authedUser";
-import { useNavigate } from "react-router";
+import {Navigate, useNavigate } from "react-router";
 
 
 
 
-const LogingPage = ({  dispatch , users }) => {
+const LogingPage = ({  dispatch , users , loggedIn}) => {
     console.log("Longing page ", users)
     const navigate = useNavigate()
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
 
     const handleUsername= (e) => {
         e.preventDefault()
@@ -68,6 +69,7 @@ const LogingPage = ({  dispatch , users }) => {
                     <input
                         data-testid="email-input"
                         type="text"
+                       // type="password"
                         placeholder="password..."
                         value={password}
                         onChange={handlePassword}
@@ -83,11 +85,10 @@ const LogingPage = ({  dispatch , users }) => {
         </div>
     )
 }
-const mapStateToProps = ({ users }) => {
+const mapStateToProps = ({ users , authedUser}) => {
     return { 
-        //users,
-      
        users : Object.values(users),
+       loggedIn: !!authedUser,
      }
 }
 export default connect(mapStateToProps)(LogingPage);
