@@ -27,9 +27,18 @@ const PollAnswer = (props) => {
   const voteOptioneOne = questions[id].optionOne.votes.includes(authedUser)
   const voteOptioneTwo = questions[id].optionTwo.votes.includes(authedUser)
   const hasVoted = voteOptioneOne || voteOptioneTwo;
+
+  const optionOneVotes = questions[id].optionOne.votes.length;
+  const optionTwoVotes = questions[id].optionTwo.votes.length;
+
+  const total = optionOneVotes + optionTwoVotes;
+  const optionOnePercent = Math.round(100 * (optionOneVotes / total));
+  const optionTwoPercent = Math.round(100 * (optionTwoVotes / total));
   
-  // const percentage = (value / total) * 100;
-  // const value = Math.floor(Math.random() * 100);
+  const  optionOnePercentMax = Math.max( optionOnePercent, optionTwoPercent)
+  const  optionTwoPercentMin = Math.min( optionOnePercent, optionTwoPercent)
+
+  
 
 
   const handleOptioneOne = (e) => {
@@ -62,10 +71,18 @@ const PollAnswer = (props) => {
           </div> 
         ) : (
           <div>
-           <div className="progress-bar">
-              <div className="progress-bar-completed" style={{ width: `${(4 / 8) * 100}%` }}>
+            <div className="progress-bar">
+              <div className="progress-bar-completed" style={{ width: `${optionOnePercentMax}%` }}>
+              <span id="progress-bar-label" className="visually-hidden">Votes: {optionOnePercent}%</span>
               </div>
-          </div>
+            </div>
+            <br></br>
+            <div className="progress-bar">
+              <div className="progress-bar-completed1" style={{ width: `${optionTwoPercentMin}%` }}>
+              <span id="progress-bar-label" className="visually-hidden">Votes:  {optionTwoPercent}%</span>
+              </div>
+            </div>
+            <h1>You Already Voted</h1>
           </div>
 
           
