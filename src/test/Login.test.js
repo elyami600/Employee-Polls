@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, userEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducers from '../reducers'; 
@@ -22,6 +22,18 @@ describe('Login' , () => {
         expect(screen.getByTestId('password-input')).toBeInTheDocument();
         expect(component.getByTestId('submit-button')).toBeInTheDocument();
         expect(component.queryByTestId('error-header')).not.toBeInTheDocument();
+       
+        // navagate to home page 
+        const button = component.getByTestId('submit-button')
+        expect(button).toBeInTheDocument();
+        fireEvent.click(button);
+
+        fireEvent.change(screen.getByTestId('username-input'), 'mtsamis');
+        fireEvent.change(screen.getByTestId('password-input'), 'xyz123');
+        fireEvent.click(component.getByTestId("submit-button", { name: "Submit" }));
+
+
+      
     }); 
     
 })
