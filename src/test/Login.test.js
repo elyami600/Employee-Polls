@@ -35,6 +35,26 @@ describe('Login' , () => {
 
       
     }); 
+    // test('disables input when empty', () => {
+    
+      
+    //     const input = getByRole('textbox');
+      
+    //     // Check if input is disabled initially
+    //     expect(input).toBeDisabled();
+      
+    //     // Type something into the input
+    //     fireEvent.change(input, { target: { value: 'hello' } });
+      
+    //     // Check if input is enabled
+    //     expect(input).not.toBeDisabled();
+      
+    //     // Clear the input
+    //     fireEvent.change(input, { target: { value: '' } });
+      
+    //     // Check if input is disabled again
+    //     expect(input).toBeDisabled();
+    //   });
     
 })
 
