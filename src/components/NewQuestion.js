@@ -25,6 +25,10 @@ const NewQuestion = ({ dispatch, id }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (optionOne === '' || optionTwo=== '') {
+            alert("Please enter both options");
+            return
+        }
         dispatch(handleAddQuestion(optionOne ,optionTwo))
 
         setOptionOne("");
