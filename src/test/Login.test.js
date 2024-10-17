@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render, screen, fireEvent, userEvent } from '@testing-library/react';
+import { render, screen, fireEvent, userEvent} from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducers from '../reducers'; 
@@ -8,53 +8,102 @@ import Login from '../components/Login';
 import { MemoryRouter } from "react-router";
 
 const store = createStore(reducers, middleware);
-const component =  render(
-    <MemoryRouter>
-        <Provider store={store}>
-            <Login />
-        </Provider>
-    </MemoryRouter>
-);
+
 
 describe('Login' , () => {
+    it("should render the component", () => {
+        const component = render(
+            <MemoryRouter>
+                <Provider store={store}>
+                    <Login />
+                </Provider>
+            </MemoryRouter>
+        );
+        expect(component).toBeDefined();
+        expect(component).toMatchSnapshot();
+      });
     it("username, password, and submit are successful in page", () => {
+        render(
+            <MemoryRouter>
+                <Provider store={store}>
+                    <Login />
+                </Provider>
+            </MemoryRouter>
+        );
         expect(screen.getByTestId('username-input')).toBeInTheDocument();
         expect(screen.getByTestId('password-input')).toBeInTheDocument();
-        expect(component.getByTestId('submit-button')).toBeInTheDocument();
-        expect(component.queryByTestId('error-header')).not.toBeInTheDocument();
+        expect(screen.getByTestId('submit-button')).toBeInTheDocument();
+        expect(screen.queryByTestId('error-header')).not.toBeInTheDocument();
        
         // navagate to home page 
-        const button = component.getByTestId('submit-button')
+        const button = screen.getByTestId('submit-button')
         expect(button).toBeInTheDocument();
         fireEvent.click(button);
 
         fireEvent.change(screen.getByTestId('username-input'), 'mtsamis');
         fireEvent.change(screen.getByTestId('password-input'), 'xyz123');
-        fireEvent.click(component.getByTestId("submit-button", { name: "Submit" }));
+        fireEvent.click(screen.getByTestId("submit-button", { name: "Submit" }));
 
 
       
     }); 
-    // test('disables input when empty', () => {
+    it('username and password are correct  or exist in datebase', () => {
+         render(
+            <MemoryRouter>
+                <Provider store={store}>
+                    <Login />
+                </Provider>
+            </MemoryRouter>
+        );
+        const username = screen.getByTestId('username-input')
+        const password = screen.getByTestId('password-input')
+        const button   = screen.getByTestId('submit-button')
+
+        fireEvent.change(username, { target: { value: 'tylermcginnis' } });
+        fireEvent.change(password, { target: { value: 'abc321' } });
+        fireEvent.click(button);
+
+        expect(screen.queryByTestId('error-header')).not.toBe("Error: Please ensure all fields are filled out.")
+    })
+    it('disables input when username and password are empty', () => {
+        render(
+           <MemoryRouter>
+               <Provider store={store}>
+                   <Login />
+               </Provider>
+           </MemoryRouter>
+       );
+       const username = screen.getByTestId('username-input')
+       const password = screen.getByTestId('password-input')
+       const button   = screen.getByTestId('submit-button')
+
+       fireEvent.change(username, { target: { value: '' } });
+       fireEvent.change(password, { target: { value: '' } });
+
+       expect(button).toBeDisabled();
+
+   })
+    // it('display an error messange if password is incorrect', () => {
+    // render(
+    //     <MemoryRouter>
+    //         <Provider store={store}>
+    //             <Login />
+    //         </Provider>
+    //     </MemoryRouter>
+    // );
+    // const username = screen.getByTestId('username-input')
+    // const password = screen.getByTestId('password-input')
+    // const button   = screen.getByTestId('submit-button')
+
+    // fireEvent.change(username, { target: { value: 'tylermcginnis' } });
+    // fireEvent.change(password, { target: { value: 'password' } });
+    // fireEvent.click(button);
+
+    // expect(screen.queryByTestId('error-header')).not.toBe("Error: Please ensure all fields are filled out.")
+
+    // })
+
     
-      
-    //     const input = getByRole('textbox');
-      
-    //     // Check if input is disabled initially
-    //     expect(input).toBeDisabled();
-      
-    //     // Type something into the input
-    //     fireEvent.change(input, { target: { value: 'hello' } });
-      
-    //     // Check if input is enabled
-    //     expect(input).not.toBeDisabled();
-      
-    //     // Clear the input
-    //     fireEvent.change(input, { target: { value: '' } });
-      
-    //     // Check if input is disabled again
-    //     expect(input).toBeDisabled();
-    //   });
     
 })
 
