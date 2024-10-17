@@ -8,30 +8,37 @@ import { MemoryRouter } from "react-router";
 import NewQuestion from '../components/NewQuestion';
 
 const store = createStore(reducers, middleware);
-const component =  render(
-    <MemoryRouter>
-        <Provider store={store}>
-            <NewQuestion />
-        </Provider>
-    </MemoryRouter>
-);
 
 describe('NewQuestion' , () => {
-    it("username, password, and submit are successful in page", () => {
+    it("should render the component", () => {
+        const component = render(
+            <MemoryRouter>
+                <Provider store={store}>
+                <NewQuestion/>
+                </Provider>
+            </MemoryRouter>
+        );
+        expect(component).toBeDefined();
+        expect(component).toMatchSnapshot();
+      });
+    
+    it("optionOne , optioneTwo and submit are successful in page", () => {
+        render(
+            <MemoryRouter>
+                <Provider store={store}>
+                    <NewQuestion />
+                </Provider>
+            </MemoryRouter> 
+        );
         expect(screen.getByTestId('optionOne-input')).toBeInTheDocument();
         expect(screen.getByTestId('optionTwo-input')).toBeInTheDocument();
-        expect(component.getByTestId('submit-button')).toBeInTheDocument();
+        expect(screen.getByTestId('submit-button')).toBeInTheDocument();
         
        
         // navagate to home page 
-        const button = component.getByTestId('submit-button')
+        const button = screen.getByTestId('submit-button')
         expect(button).toBeInTheDocument();
-        fireEvent.click(button);
-
-        
-
-
-      
+        fireEvent.click(button); 
     }); 
     
 })
