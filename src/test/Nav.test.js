@@ -8,16 +8,29 @@ import { MemoryRouter } from "react-router";
 import Nav from '../components/Nav';
 
 const store = createStore(reducers, middleware);
-const component =  render(
-    <MemoryRouter>
-        <Provider store={store}>
-            <Nav/>
-        </Provider>
-    </MemoryRouter>
-);
+
 
 describe('Nav' , () => {
+    it("should render the component", () => {
+        const component = render(
+            <MemoryRouter>
+                <Provider store={store}>
+                <Nav/>
+                </Provider>
+            </MemoryRouter>
+        );
+        expect(component).toBeDefined();
+        expect(component).toMatchSnapshot();
+      });
+
     it("/home, leaderboard, add and login should redirect and update dom ", () => {
+        render(
+            <MemoryRouter>
+                <Provider store={store}>
+                <Nav/>
+                </Provider>
+            </MemoryRouter>
+        );
         fireEvent.click(screen.getByText('Home'))
         expect(screen.getByText('Home')).toBeInTheDocument();
 
@@ -28,7 +41,8 @@ describe('Nav' , () => {
         expect(screen.getByText('New Question')).toBeInTheDocument();
 
         fireEvent.click(screen.getByText('Loging'))
-    });  expect(screen.getByText('Loging')).toBeInTheDocument();
+        expect(screen.getByText('Loging')).toBeInTheDocument();
+    }); 
     
 })
 
