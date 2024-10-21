@@ -7,7 +7,7 @@ const PrivateRoute = ({ loading }) => {
     return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
 };
 const mapStateToProps = ({ authedUser }) => ({
-    loading: authedUser === null,
+    loading: authedUser,
   })
   
 export default connect(mapStateToProps)(PrivateRoute);
