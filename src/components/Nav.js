@@ -3,13 +3,20 @@ import { Link, useNavigate } from "react-router-dom";
 import { setAuthedUser } from "../actions/authedUser";
 
 
-const Nav = ({ dispatch, authedUser }) => {
+const Nav = ({ dispatch, authedUser, curentUser }) => {
+    //console.log("Props  nav currrentUser ", curentUser.name)
+
     const navigate = useNavigate();
 
     const logout = (e) => {
         e.preventDefault();
-        dispatch(setAuthedUser(null));
-        navigate('/login');
+        if(curentUser != null)
+            dispatch(setAuthedUser(null));
+            navigate('/login');
+
+        
+        
+     
       };
 
     return (
@@ -27,10 +34,9 @@ const Nav = ({ dispatch, authedUser }) => {
                 <li>
                     <Link data-testid='loging'      to="/login">Loging</Link>
                 </li>
-                <li data-testid='authedUser'>
-                     User: {authedUser}
-                </li>
-                {authedUser !== null && <li>
+                <li data-testid='authedUser'> User: {authedUser} </li>
+
+                {<li>
                     <Link data-testid='logout' onClick={logout}>Logout</Link>
                 </li>}
             </ul>
@@ -39,8 +45,9 @@ const Nav = ({ dispatch, authedUser }) => {
     )
 }
 
-const mapStateToProps = ({ authedUser }) => {
+const mapStateToProps = ({ authedUser, users }) => {
     return {
+      curentUser : users[authedUser],
       authedUser,
     };
   };
