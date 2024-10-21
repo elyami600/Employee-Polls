@@ -19,14 +19,19 @@ const App = (props) => {
    useEffect(() => {
       props.dispatch(handleInitialData());
     }, []);
-  
+
+    
   return (
     <div>
       <Fragment>
         <div className="container"></div>
         <Nav/>
         {
-        props.loading === true ? null : (
+        props.loading ===  null ? (
+          <Routes>
+            <Route path="/login"        element={<Login/>}/>
+          </Routes>
+        ): (
           <Routes>
              <Route path="/"       exact element={<Dashboard/>}/>
              <Route path="/question/:id" element={<PollAnswer/>}/>
@@ -41,8 +46,9 @@ const App = (props) => {
   );
 }
 
-const mapStateToProps = ({ authedUser }) => ({
+const mapStateToProps = ({ authedUser, }) => ({
   loading: authedUser === null,
+  authedUser : authedUser
 })
 
 export default  connect(mapStateToProps)(App);
