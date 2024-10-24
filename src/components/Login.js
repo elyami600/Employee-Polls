@@ -48,10 +48,10 @@ const LoginPage = ({ dispatch, users, loggedIn }) => {
                 </h1>
             )}
             <h1 className="center">Log In</h1>
-            <form onSubmit={handleSubmit}>
+            <form className="center" onSubmit={handleSubmit}>
                 <div>
                     <label>Username:</label>
-                    <input
+                    <input 
                         data-testid="username-input"
                         type="text"
                         placeholder="username..."
@@ -60,9 +60,10 @@ const LoginPage = ({ dispatch, users, loggedIn }) => {
                         onChange={handleInputChange}
                     />
                 </div>
+                <br/>
                 <div>
                     <label>Password:</label>
-                    <input
+                    <input 
                         data-testid="password-input"
                         type="password"
                         placeholder="password..."
