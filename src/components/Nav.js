@@ -13,10 +13,6 @@ const Nav = ({ dispatch, authedUser, curentUser }) => {
         if(curentUser != null)
             dispatch(setAuthedUser(null));
             navigate('/login');
-
-        
-        
-     
       };
 
     return (
@@ -26,7 +22,7 @@ const Nav = ({ dispatch, authedUser, curentUser }) => {
                     <Link data-testid='home' to="/">Home</Link>
                 </li>
                 <li>
-                    <Link data-testid='leaderdoard' to="/leaderdoard">Leaderdboard</Link>
+                    <Link data-testid='leaderdoard' to="/leaderboard">Leaderdboard</Link>
                 </li>
                 <li>
                     <Link data-testid='newQuestion' to="/add">New Question</Link>
@@ -35,7 +31,6 @@ const Nav = ({ dispatch, authedUser, curentUser }) => {
                     <Link data-testid='loging'      to="/login">Loging</Link>
                 </li>
                 <li data-testid='authedUser'> User: {authedUser} </li>
-
                 <li>
                     <Link data-testid='logout' onClick={logout}>Logout</Link>
                 </li>
