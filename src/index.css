@@ -52,6 +52,16 @@ a {
   flex-direction: row;
   justify-content: flex-start;
   text-decoration: none;
+  margin-left: 12px;
+}
+.nav .nav-avatar i {
+  display: flex;
+  align-items: center;
+}
+.nav .nav-avatar img {
+  height: 25px;
+  width: auto;
+  margin-right: 10px;
 }
 
 .nav li:first-child {

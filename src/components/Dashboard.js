@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import Question from "./Question";
 
-const Dashboard = ({questions, questionsIds, authedUser }) => {
+const Dashboard = ({ questions, questionsIds, authedUser }) => {
 
   // check if the id has answer the question
   // return new array question ID that authedUser hasnt voted yet

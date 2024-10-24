@@ -29,10 +29,13 @@ const Nav = ({ dispatch, authedUser, curentUser }) => {
                 {curentUser == true && <li>
                     <Link data-testid='loging'      to="/login">Loging</Link>
                 </li>}
-                <li data-testid='authedUser'>
+                <div className="nav-avatar">
+                    <li data-testid='authedUser'>
                     <img src={`${curentUser.avatarURL}`} alt={`Avar of ${curentUser.name}`} className="avatar" />
-                    <strong>User: {curentUser.name}</strong>
-                </li>
+                    <strong>{curentUser.name}</strong>
+                    </li>
+                </div>
+               
                 <li>
                     <Link data-testid='logout' onClick={logout}>Logout</Link>
                 </li>
