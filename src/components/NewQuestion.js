@@ -71,7 +71,6 @@ const NewQuestion = ({ dispatch, id }) => {
 const mapStateToProps = ({authedUser}) => {
     return {
        authedUser,
-
     }
 }
 export default connect(mapStateToProps)(NewQuestion);
