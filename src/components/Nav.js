@@ -36,9 +36,9 @@ const Nav = ({ dispatch, authedUser, curentUser }) => {
                 </li>
                 <li data-testid='authedUser'> User: {authedUser} </li>
 
-                {<li>
+                <li>
                     <Link data-testid='logout' onClick={logout}>Logout</Link>
-                </li>}
+                </li>
             </ul>
 
         </nav>

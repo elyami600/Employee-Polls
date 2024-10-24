@@ -1,89 +1,92 @@
 import { useState } from "react";
 import { connect } from "react-redux";
 import { setAuthedUser } from "../actions/authedUser";
-import {Navigate, useNavigate } from "react-router";
+import { Navigate, useNavigate } from "react-router-dom";
 
-
-
-
-const LogingPage = ({  dispatch , users , loggedIn}) => {
-    console.log("Longing page ", users)
-    const navigate = useNavigate()
-    const [success, setSuccess] = useState(false);
+const LoginPage = ({ dispatch, users, loggedIn }) => {
+    const navigate = useNavigate();
     const [error, setError] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-
-    const handleUsername= (e) => {
-        e.preventDefault()
-        const username = e.target.value;
-       setUsername(username)
+    // Redirect if logged in
+    if (loggedIn) {
+        const params = new URLSearchParams(window.location.search);
+        const redirectURL = params.get('redirectTo');
+        return <Navigate to={redirectURL || "/"} />;
     }
 
-    const handlePassword = (e) => {
-        e.preventDefault()
-        const password = e.target.value;
-        setPassword(password)
-    }
-
+    // Single handler for both inputs
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        if (name === "username") setUsername(value);
+        else if (name === "password") setPassword(value);
+    };
+   // handler the submit  for both inputs
+   // ckeck if the user exits
     const handleSubmit = (e) => {
         e.preventDefault();
-        const userExit = users.find((user) => 
-            (user.id.includes(username) && 
-            user.password.includes(password)))  
+        const userExists = users.find(
+            (user) => user.id === username && user.password === password
+        );
 
-        if(userExit) {
-            dispatch(setAuthedUser(username)); 
-            setSuccess(true)
-            setError(false)
+        if (userExists) {
+            dispatch(setAuthedUser(username));
             navigate("/");
-            return;
-        } 
-        setSuccess(false);
-        setError(true);
-        setUsername("")
-        setPassword("")
+        } else {
+            setError(true);
+            setUsername("");
+            setPassword("");
+        }
+    };
 
-    }
-
-    return(
+    return (
         <div className="container">
-            {error &&
-                <h1 data-testid="error-header">Error: Please ensure all fields are filled out.</h1>
-            }
-            <h1 className="center">Long In</h1>
+            {error && (
+                <h1 data-testid="error-header">
+                    Error: Invalid username or password.
+                </h1>
+            )}
+            <h1 className="center">Log In</h1>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>username:</label>
+                    <label>Username:</label>
                     <input
                         data-testid="username-input"
                         type="text"
                         placeholder="username..."
+                        name="username"
                         value={username}
-                        onChange={handleUsername}
+                        onChange={handleInputChange}
                     />
                 </div>
                 <div>
-                    <label>password:</label>
+                    <label>Password:</label>
                     <input
                         data-testid="password-input"
                         type="password"
                         placeholder="password..."
+                        name="password"
                         value={password}
-                        onChange={handlePassword}
+                        onChange={handleInputChange}
                     />
                 </div>
-                <button data-testid="submit-button"  className="btn" type="submit" disabled={username === "" && password === ""}>Submit</button>
+                <button
+                    data-testid="submit-button"
+                    className="btn"
+                    type="submit"
+                    disabled={!username || !password}
+                >
+                    Submit
+                </button>
             </form>
-            
         </div>
-    )
-}
-const mapStateToProps = ({ users , authedUser}) => {
-    return { 
-       users : Object.values(users),
-       loggedIn: !!authedUser,
-     }
-}
-export default connect(mapStateToProps)(LogingPage);
+    );
+};
+
+const mapStateToProps = ({ users, authedUser }) => ({
+    users: Object.values(users),
+    loggedIn: !!authedUser,
+});
+
+export default connect(mapStateToProps)(LoginPage);
