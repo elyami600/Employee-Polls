@@ -1,7 +1,7 @@
 // App.js
 import { useEffect } from "react";
 import { handleInitialData } from "../actions/shared";
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import { Routes, Route } from "react-router";
 import Dashboard from "./Dashboard";
 import Nav from "./Nav";
@@ -11,6 +11,8 @@ import NotFound from "./404page";
 import Login from './Login';
 import PollAnswer from "./PollAnswer";
 import PrivateRoute from "./PrivateRoute";
+
+
 
 const App = ({ dispatch, authedUser, loading }) => {
   useEffect(() => {
