@@ -4,16 +4,15 @@ import { setAuthedUser } from "../actions/authedUser";
 
 
 const Nav = ({ dispatch, authedUser, curentUser }) => {
-    //console.log("Props  nav currrentUser ", curentUser.name)
+    console.log("Props  nav currrentUser ", curentUser.avatarURL)
 
     const navigate = useNavigate();
 
     const logout = (e) => {
         e.preventDefault();
-        if(curentUser != null)
-            dispatch(setAuthedUser(null));
-            navigate('/login');
-      };
+        dispatch(setAuthedUser(null));
+        navigate('/login');
+    }
 
     return (
         <nav className="nav">
@@ -30,7 +29,10 @@ const Nav = ({ dispatch, authedUser, curentUser }) => {
                 {curentUser == true && <li>
                     <Link data-testid='loging'      to="/login">Loging</Link>
                 </li>}
-                <li data-testid='authedUser'><strong>User: {authedUser}</strong></li>
+                <li data-testid='authedUser'>
+                    <img src={`${curentUser.avatarURL}`} alt={`Avar of ${curentUser.name}`} className="avatar" />
+                    <strong>User: {curentUser.name}</strong>
+                </li>
                 <li>
                     <Link data-testid='logout' onClick={logout}>Logout</Link>
                 </li>
