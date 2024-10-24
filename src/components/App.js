@@ -1,54 +1,49 @@
-
-import { Fragment, useEffect } from "react";
+// App.js
+import { useEffect } from "react";
 import { handleInitialData } from "../actions/shared";
 import { connect } from "react-redux";
+import { Routes, Route } from "react-router";
 import Dashboard from "./Dashboard";
 import Nav from "./Nav";
-import { Routes, Route } from "react-router";
 import NewQuestion from "./NewQuestion";
 import LeaderBoard from "./LeaderBoard";
-import NotFound from "./404page"
-import Login from './Login'
+import NotFound from "./404page";
+import Login from './Login';
 import PollAnswer from "./PollAnswer";
+import PrivateRoute from "./PrivateRoute";
 
+const App = ({ dispatch, authedUser, loading }) => {
+  useEffect(() => {
+    dispatch(handleInitialData());
+  }, [dispatch]);
 
-
-const App = (props) => {
-  console.log("App props", props)
-
-   useEffect(() => {
-      props.dispatch(handleInitialData());
-    }, []);
-
-    
   return (
     <div>
-      <Fragment>
-        <div className="container"></div>
-        <Nav/>
-        {
-        props.loading ===  null ? (
-          <Routes>
-            <Route path="/login"        element={<Login/>}/>
-          </Routes>
-        ): (
-          <Routes>
-             <Route path="/"       exact element={<Dashboard/>}/>
-             <Route path="/question/:id" element={<PollAnswer/>}/>
-             <Route path="/leaderdoard"  element={<LeaderBoard/>}/>
-             <Route path="/add"          element={<NewQuestion/>}/>
-             <Route path="/login"        element={<Login/>}/>
-             <Route path="*"             element={<NotFound/>} />
-          </Routes>
-        )}
-      </Fragment>
+      {authedUser && <Nav />}
+      <div className="container">
+        <Routes>
+          {/* Protected routes wrapped inside PrivateRoute */}
+          <Route element={<PrivateRoute />}>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/question/:id" element={<PollAnswer />} />
+            <Route path="/leaderboard" element={<LeaderBoard />} />
+            <Route path="/add" element={<NewQuestion />} />
+          </Route>
+
+          {/* Login route accessible without authentication */}
+          <Route path="/login" element={<Login />} />
+
+          {/* Catch all route */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
     </div>
   );
-}
+};
 
-const mapStateToProps = ({ authedUser, }) => ({
+const mapStateToProps = ({ authedUser }) => ({
+  authedUser,
   loading: authedUser === null,
-  authedUser : authedUser
-})
+});
 
-export default  connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(App);
