@@ -27,10 +27,10 @@ const Nav = ({ dispatch, authedUser, curentUser }) => {
                 <li>
                     <Link data-testid='newQuestion' to="/add">New Question</Link>
                 </li>
-                <li>
+                {curentUser == true && <li>
                     <Link data-testid='loging'      to="/login">Loging</Link>
-                </li>
-                <li data-testid='authedUser'> User: {authedUser} </li>
+                </li>}
+                <li data-testid='authedUser'><strong>User: {authedUser}</strong></li>
                 <li>
                     <Link data-testid='logout' onClick={logout}>Logout</Link>
                 </li>

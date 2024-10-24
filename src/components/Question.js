@@ -5,12 +5,13 @@ import NotFound from "./404page"
 
 
 const Questions = (props) => {
+    console.log("Questions props ", props)
     const navigate = useNavigate();
     
     if(props.questions === null) {
         return <NotFound/>
     }
-    console.log("Questions props ", props)
+   
     const {id, name, avatar, timestamp } = props.question
 
     const toParent = (e, id) => {
@@ -37,7 +38,7 @@ const Questions = (props) => {
 
 
 
-const mapStateToProps = ({authedUser, users, questions }, {id}) => {
+const mapStateToProps = ({ authedUser, users, questions }, {id}) => {
     const question = questions[id];
 
     return{

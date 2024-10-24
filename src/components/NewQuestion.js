@@ -6,10 +6,10 @@ import { handleAddQuestion } from "../actions/questions";
 
 
 const NewQuestion = ({ dispatch, id }) => {
-
+    const navigate = useNavigate()
     const [optionOne, setOptionOne] = useState('')
     const [optionTwo, setOptionTwo] = useState('')
-    const navigate = useNavigate()
+    
 
     const handleOptionOne = (e) => {
         e.preventDefault()
