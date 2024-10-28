@@ -1,4 +1,3 @@
-// App.js
 import { useEffect } from "react";
 import { handleInitialData } from "../actions/shared";
 import { connect } from 'react-redux';

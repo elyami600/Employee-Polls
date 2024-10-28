@@ -4,7 +4,7 @@ import { setAuthedUser } from "../actions/authedUser";
 
 
 const Nav = ({ dispatch, authedUser, curentUser }) => {
-    console.log("Props  nav currrentUser ", curentUser.avatarURL)
+   // console.log("Props  nav currrentUser ", curentUser.avatarURL)
 
     const navigate = useNavigate();
 

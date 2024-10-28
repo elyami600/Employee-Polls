@@ -8,41 +8,54 @@ Object {
       <div>
         <div
           class="container"
-        />
-        <nav
-          class="nav"
         >
-          <ul>
-            <li>
-              <a
-                href="/"
+          <div
+            class="container"
+          >
+            <h1
+              class="center"
+            >
+              Log In
+            </h1>
+            <form
+              class="center"
+            >
+              <div>
+                <label>
+                  Username:
+                </label>
+                <input
+                  data-testid="username-input"
+                  name="username"
+                  placeholder="username..."
+                  type="text"
+                  value=""
+                />
+              </div>
+              <br />
+              <div>
+                <label>
+                  Password:
+                </label>
+                <input
+                  data-testid="password-input"
+                  name="password"
+                  placeholder="password..."
+                  type="password"
+                  value=""
+                />
+              </div>
+              <button
+                class="btn"
+                data-testid="submit-button"
+                disabled=""
+                type="submit"
               >
-                Home
-              </a>
-            </li>
-            <li>
-              <a
-                href="/leaderdoard"
-              >
-                Leaderdboard
-              </a>
-            </li>
-            <li>
-              <a
-                href="/add"
-              >
-                New Question
-              </a>
-            </li>
-            <li>
-              <a
-                href="/login"
-              >
-                Loging
-              </a>
-            </li>
-          </ul>
-        </nav>
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </body>,
@@ -50,41 +63,54 @@ Object {
     <div>
       <div
         class="container"
-      />
-      <nav
-        class="nav"
       >
-        <ul>
-          <li>
-            <a
-              href="/"
+        <div
+          class="container"
+        >
+          <h1
+            class="center"
+          >
+            Log In
+          </h1>
+          <form
+            class="center"
+          >
+            <div>
+              <label>
+                Username:
+              </label>
+              <input
+                data-testid="username-input"
+                name="username"
+                placeholder="username..."
+                type="text"
+                value=""
+              />
+            </div>
+            <br />
+            <div>
+              <label>
+                Password:
+              </label>
+              <input
+                data-testid="password-input"
+                name="password"
+                placeholder="password..."
+                type="password"
+                value=""
+              />
+            </div>
+            <button
+              class="btn"
+              data-testid="submit-button"
+              disabled=""
+              type="submit"
             >
-              Home
-            </a>
-          </li>
-          <li>
-            <a
-              href="/leaderdoard"
-            >
-              Leaderdboard
-            </a>
-          </li>
-          <li>
-            <a
-              href="/add"
-            >
-              New Question
-            </a>
-          </li>
-          <li>
-            <a
-              href="/login"
-            >
-              Loging
-            </a>
-          </li>
-        </ul>
-      </nav>
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>,
   "debug": [Function],
