@@ -1,9 +1,10 @@
-// PrivateRoute.js
 import { connect } from 'react-redux';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 
-const PrivateRoute = ({ authedUser }) => {
-  return authedUser ? <Outlet /> : <Navigate to="/login" />;
+
+const PrivateRoute = ({ authedUser, children }) => {
+  const location = useLocation();
+  return authedUser ? children : <Navigate to="/login" replace state={{ path: location.pathname }} />;
 };
 
 const mapStateToProps = ({ authedUser }) => ({
