@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import { setAuthedUser } from "../actions/authedUser";
 import { Navigate, useNavigate, useLocation } from "react-router-dom";
 
+
+
+
 const LoginPage = ({ dispatch, users, loggedIn }) => {
     const navigate = useNavigate();
     const { state } = useLocation();
@@ -10,6 +13,9 @@ const LoginPage = ({ dispatch, users, loggedIn }) => {
     const [error, setError] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedOption, setSelectedOption] = useState(null);
+    
 
     // Redirect if logged in
     if (loggedIn) {
@@ -42,14 +48,30 @@ const LoginPage = ({ dispatch, users, loggedIn }) => {
         }
     };
 
+    const toggleDropdown = () => {
+        setIsOpen(!isOpen);
+      };
+
+      
+      const handleUserSelect = (user) => {
+        setUsername(user.id);
+        setPassword(user.password);
+        setIsOpen(false); 
+        setError(false); 
+    };
+    
+
     return (
         <div className="container">
             {error && (
-                <h1 data-testid="error-header">
+                <h1 className="center" data-testid="error-header">
                     Error: Invalid username or password.
                 </h1>
             )}
+            
             <h1 className="center">Log In</h1>
+            <button className="center" onClick={toggleDropdown}><strong>Exist User</strong></button>
+           
             <form className="center" onSubmit={handleSubmit}>
                 <div>
                     <label>Username:</label>
@@ -74,6 +96,15 @@ const LoginPage = ({ dispatch, users, loggedIn }) => {
                         onChange={handleInputChange}
                     />
                 </div>
+                {isOpen && (
+                <ul className="center">
+                    {users.map((user) => (
+                        <li key={user.id} onClick={() => handleUserSelect(user)}>
+                            {user.name}
+                        </li>
+                    ))}
+                </ul>
+            )}
                 <button
                     data-testid="submit-button"
                     className="btn"
@@ -82,7 +113,11 @@ const LoginPage = ({ dispatch, users, loggedIn }) => {
                 >
                     Submit
                 </button>
+
             </form>
+    
+           
+            
         </div>
     );
 };
