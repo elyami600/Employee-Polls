@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { connect } from "react-redux";
 import { setAuthedUser } from "../actions/authedUser";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, useLocation } from "react-router-dom";
 
 const LoginPage = ({ dispatch, users, loggedIn }) => {
     const navigate = useNavigate();
+    const { state } = useLocation();
+
     const [error, setError] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -32,7 +34,7 @@ const LoginPage = ({ dispatch, users, loggedIn }) => {
 
         if (userExists) {
             dispatch(setAuthedUser(username));
-            navigate("/");
+            navigate(state?.path || "/");
         } else {
             setError(true);
             setUsername("");
