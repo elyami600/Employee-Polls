@@ -2,6 +2,9 @@
 import { connect } from "react-redux"
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { handleAddQuestionAnswer } from "../actions/questions";
+import { setAuthedUser } from "../actions/authedUser";
+import NotFound from './404page'
+import { useEffect } from "react";
 
 
 const withRouter = (Component) => {
@@ -18,8 +21,19 @@ const withRouter = (Component) => {
 
 const PollAnswer = (props) => {
   console.log("Poll answer ", props)
+  const navigate = useNavigate();
 
-  const { dispatch, id, users,authedUser, questions } = props;
+  const { dispatch, id, users , authedUser, questions } = props;
+  
+  useEffect(() => {
+    if (!questions[id]) {
+      dispatch(setAuthedUser(null));
+      navigate('/login');
+    }
+  },[questions[id],dispatch, navigate])
+
+  if (!questions[id]) return <NotFound />;
+
   const question = questions[id];
   const avatar   = users[question.author].avatarURL
   const name     = users[question.author].name
@@ -59,28 +73,28 @@ const PollAnswer = (props) => {
         {!hasVoted ? (
           <div>
             <h1>Would You Rather </h1>
-          <div>
-            <h3>{question.optionOne.text} </h3>
-            <button onClick={handleOptioneOne}>Click</button>   
-          </div>
-          <div>
-            <h3>{question.optionTwo.text} </h3>
-            <button onClick={handleOptioneTwo}>Click</button>   
-          </div>
+              <div>
+                <h3>{question.optionOne.text} </h3>
+                <button onClick={handleOptioneOne}>Click</button>   
+              </div>
+              <div>
+                <h3>{question.optionTwo.text} </h3>
+                <button onClick={handleOptioneTwo}>Click</button>   
+              </div>
 
           </div> 
         ) : (
           <div>
              <h1>You Already Voted</h1>
-            <div className="progress-bar">
-              <div className="progress-bar-completed" style={{ width: `${optionOnePercentMax}%` }}>
-              <span id="progress-bar-label" className="visually-hidden">Votes: {optionOnePercentMax}%</span>
+              <div className="progress-bar">
+                <div className="progress-bar-completed" style={{ width: `${optionOnePercentMax}%` }}>
+                  <span id="progress-bar-label" className="visually-hidden">Votes: {optionOnePercentMax}%</span>
               </div>
             </div>
             <br></br>
             <div className="progress-bar">
               <div className="progress-bar-completed1" style={{ width: `${optionTwoPercentMin}%` }}>
-              <span id="progress-bar-label" className="visually-hidden">Votes:  {optionTwoPercentMin}%</span>
+                <span id="progress-bar-label" className="visually-hidden">Votes:  {optionTwoPercentMin}%</span>
               </div>
             </div>
            
