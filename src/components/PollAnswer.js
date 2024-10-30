@@ -1,29 +1,37 @@
 
-import { connect } from "react-redux"
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate, useParams } from "react-router-dom";
 import { handleAddQuestionAnswer } from "../actions/questions";
 import { setAuthedUser } from "../actions/authedUser";
 import NotFound from './404page'
 import { useEffect } from "react";
 
 
-const withRouter = (Component) => {
-    const ComponentWithRouterProp = (props) => {
-      let location = useLocation();
-      let navigate = useNavigate();
-      let params = useParams();
-      return <Component {...props} router={{ location, navigate, params }} />;
-    };
+// const withRouter = (Component) => {
+//   //   const ComponentWithRouterProp = (props) => {
+//   //     let location = useLocation();
+//   //     let navigate = useNavigate();
+//   //     let params = useParams();
+//   //     return <Component {...props} router={{ location, navigate, params }} />;
+//   //   };
   
-    return ComponentWithRouterProp;
-  };
+//   //   return ComponentWithRouterProp;
+//   // };
 
 
 const PollAnswer = (props) => {
   console.log("Poll answer ", props)
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const params = useParams();
+  const id = params.id
+  const authedUser = useSelector((state) => state.authedUser)
+  const users      = useSelector((state) => state.users)
+  const questions  = useSelector((state) => state.questions)
+  
 
-  const { dispatch, id, users , authedUser, questions } = props;
+  
+  //const { dispatch, id, users , authedUser, questions } = props;
   
   useEffect(() => {
     if (!questions[id]) {
@@ -107,16 +115,17 @@ const PollAnswer = (props) => {
 </div>
   )
 }
+export default PollAnswer
 
-const mapStateToProps = ({ authedUser, users, questions,}, props) => {
-  const { id }= props.router.params;
+// const mapStateToProps = ({ authedUser, users, questions,}, props) => {
+//   const { id }= props.router.params;
  
-  return {
-    id,
-    users,
-    questions,
-    authedUser
-  }
-}
+//   return {
+//     id,
+//     users,
+//     questions,
+//     authedUser
+//   }
+// }
 
-export default withRouter(connect(mapStateToProps)(PollAnswer))
+// export default withRouter(connect(mapStateToProps)(PollAnswer))

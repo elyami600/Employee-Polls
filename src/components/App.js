@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { handleInitialData } from "../actions/shared";
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Routes, Route } from "react-router";
 import Dashboard from "./Dashboard";
 import Nav from "./Nav";
@@ -11,7 +11,12 @@ import Login from './Login';
 import PollAnswer from "./PollAnswer";
 import PrivateRoute from "./PrivateRoute";
 
-const App = ({ dispatch, authedUser, loading }) => {
+const App = () => {
+  const authedUser = useSelector((state) => state.authedUser);
+  //const loading = authedUser === null;
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(handleInitialData());
   }, [dispatch]);
@@ -33,9 +38,11 @@ const App = ({ dispatch, authedUser, loading }) => {
   );
 };
 
-const mapStateToProps = ({ authedUser }) => ({
-  authedUser,
-  loading: authedUser === null,
-});
+export default App;
 
-export default connect(mapStateToProps)(App);
+// const mapStateToProps = ({ authedUser }) => ({
+//   authedUser,
+//   loading: authedUser === null,
+// });
+
+// export default connect(mapStateToProps)(App);

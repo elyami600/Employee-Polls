@@ -1,9 +1,13 @@
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import Question from "./Question";
 import NotFound from './404page'
 import { useState } from "react";
-const Dashboard = ({ questions, questionsIds, authedUser }) => {
-  console.log("Dashboard props ", questionsIds)
+
+const Dashboard = () => {
+  //console.log("Dashboard props ", questionsIds)
+  const authedUser = useSelector((state) => state.authedUser)
+  const questions  = useSelector((state) => state.questions);
+  const questionsIds = Object.keys(questions).sort((a, b) => questions[b].timestamp - questions[a].timestamp)
 
   const [showNewQuestions, setShowNewQuestions] = useState(true);
 
@@ -56,13 +60,15 @@ const Dashboard = ({ questions, questionsIds, authedUser }) => {
   );
 };
 
-const mapStateToProps = ({ questions, authedUser}) => ({
+export default Dashboard
 
-    questionsIds: Object.keys(questions).sort(
-      (a, b) => questions[b].timestamp - questions[a].timestamp
-    ),
-    questions,
-    authedUser,
+// const mapStateToProps = ({ questions, authedUser}) => ({
+
+//     questionsIds: Object.keys(questions).sort(
+//       (a, b) => questions[b].timestamp - questions[a].timestamp
+//     ),
+//     questions,
+//     authedUser,
   
-});
-export default connect(mapStateToProps)(Dashboard);
+// });
+// export default connect(mapStateToProps)(Dashboard);
