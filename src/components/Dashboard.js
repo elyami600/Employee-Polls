@@ -1,41 +1,60 @@
 import { connect } from "react-redux";
 import Question from "./Question";
-
+import NotFound from './404page'
+import { useState } from "react";
 const Dashboard = ({ questions, questionsIds, authedUser }) => {
+  console.log("Dashboard props ", questionsIds)
+
+  const [showNewQuestions, setShowNewQuestions] = useState(true);
+
+  if (!questions) return <NotFound />;
 
   // check if the id has answer the question
-  // return new array question ID that authedUser hasnt voted yet
-  const hasAnwerQuestion = questionsIds.filter((id) => {
+  // return new array question ID that authedUser hasnt voted ye
+  const answeredQuestions = questionsIds.filter((id) => {
     const { optionOne, optionTwo } = questions[id];
     return optionOne.votes.includes(authedUser) || optionTwo.votes.includes(authedUser);
   });
-  const notAnswersQuestion = questionsIds.filter((id) => !hasAnwerQuestion.includes(id));
+  const unansweredQuestions = questionsIds.filter((id) => !answeredQuestions.includes(id));
   
-  console.log("Dashboard props ", questionsIds)
-    return (
-      <div className="card-grid">
-        <h3 className="center">New Questions</h3>
-        <ul className="dashboard-list">
-            {notAnswersQuestion.map((id) =>(
-                <li key={id}>
-                  <Question id={id}/>
-                </li>
-            ))}
-        </ul>
+ 
+  return (
+    <div className="card-grid">
+      <button className="togle-btn" onClick={() => setShowNewQuestions(!showNewQuestions)}>
+        {showNewQuestions ? "Show Done Questions" : "Show New Questions"}
+      </button>
 
-        <hr style={{ border:"1px dotted #8c8b8b", width: "700px", color: 'blue', fontSize: '20px' }}></hr>
-
-        <h3 className="center">Done</h3>
-        <ul className="dashboard-list">
-            {questionsIds.map((id) =>(
-                <li key={id}>
-                  <Question id={id}/>
-                </li>
+      {showNewQuestions ? (
+        <>
+          <h3 className="center"><strong>Unanswered polls</strong></h3>
+          <br/>
+          <br/>
+          <ul className="dashboard-list">
+            {unansweredQuestions.map((id) => (
+              <li key={id}>
+                <Question id={id} />
+              </li>
             ))}
-        </ul>
-      </div>
-    )
-}
+          </ul>
+        </>
+      ) : (
+        <>
+
+          <h3 className="center"><strong> Answered polls</strong></h3>
+          <br/>
+          <br/>
+          <ul className="dashboard-list">
+            {answeredQuestions.map((id) => (
+              <li key={id}>
+                <Question id={id} />
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+    </div>
+  );
+};
 
 const mapStateToProps = ({ questions, authedUser}) => ({
 
@@ -45,6 +64,5 @@ const mapStateToProps = ({ questions, authedUser}) => ({
     questions,
     authedUser,
   
-  
-  });
+});
 export default connect(mapStateToProps)(Dashboard);
