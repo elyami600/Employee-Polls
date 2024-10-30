@@ -32,15 +32,11 @@ const Nav = ({ dispatch, currentUser, authedUser }) => {
                 {currentUser && (
                     <div>
                         <li className="nav-avatar" data-testid="authedUser">
-                            <img 
-                                src={currentUser.avatarURL} 
-                                alt={`Avatar of ${currentUser.name}`} 
-                                className="avatar" 
-                            />
+                            <img src={currentUser.avatarURL}  alt={`Avatar of ${currentUser.name}`} className="avatar" />
                             <strong>{currentUser.name}</strong>
                         </li>
                         <li>
-                            <button data-testid="logout" onClick={handleLogout} className="logout-btn">Logout</button>
+                            <button data-testid="logout-btn" onClick={handleLogout} className="logout-btn">Logout</button>
                         </li>
                     </div>
                 )}

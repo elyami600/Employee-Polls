@@ -14,7 +14,7 @@ const LoginPage = ({ dispatch, users, loggedIn }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(null);
+    
     
 
     // Redirect if logged in
@@ -70,7 +70,7 @@ const LoginPage = ({ dispatch, users, loggedIn }) => {
             )}
             
             <h1 className="center">Log In</h1>
-            <button className="center" onClick={toggleDropdown}><strong>Exist User</strong></button>
+            <button className="existUser-btn" onClick={toggleDropdown}><strong>Exist User</strong></button>
            
             <form className="center" onSubmit={handleSubmit}>
                 <div>
@@ -96,6 +96,8 @@ const LoginPage = ({ dispatch, users, loggedIn }) => {
                         onChange={handleInputChange}
                     />
                 </div>
+                <br/>
+                <br/>
                 {isOpen && (
                 <ul className="center">
                     {users.map((user) => (
@@ -104,7 +106,8 @@ const LoginPage = ({ dispatch, users, loggedIn }) => {
                         </li>
                     ))}
                 </ul>
-            )}
+            )}  <br/>
+               <br/>
                 <button
                     data-testid="submit-button"
                     className="btn"
