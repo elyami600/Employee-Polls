@@ -11,8 +11,6 @@ import Login from './Login';
 import PollAnswer from "./PollAnswer";
 import PrivateRoute from "./PrivateRoute";
 
-
-
 const App = ({ dispatch, authedUser, loading }) => {
   useEffect(() => {
     dispatch(handleInitialData());
@@ -23,18 +21,11 @@ const App = ({ dispatch, authedUser, loading }) => {
       {authedUser && <Nav />}
       <div className="container">
         <Routes>
-          {/* Protected routes wrapped inside PrivateRoute */}
-          <Route element={<PrivateRoute />}>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/question/:id" element={<PollAnswer />} />
-            <Route path="/leaderboard" element={<LeaderBoard />} />
-            <Route path="/add" element={<NewQuestion />} />
-          </Route>
-
-          {/* Login route accessible without authentication */}
+          <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+          <Route path="/question/:id" element={<PrivateRoute><PollAnswer /></PrivateRoute>} />
+          <Route path="/leaderboard" element={<PrivateRoute><LeaderBoard /></PrivateRoute>} />
+          <Route path="/add" element={<PrivateRoute><NewQuestion /></PrivateRoute>} />
           <Route path="/login" element={<Login />} />
-
-          {/* Catch all route */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
