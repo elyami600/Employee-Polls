@@ -13,6 +13,13 @@ Object {
         >
           Log In
         </h1>
+        <button
+          class="existUser-btn"
+        >
+          <strong>
+            Exist User
+          </strong>
+        </button>
         <form
           class="center"
         >
@@ -41,6 +48,11 @@ Object {
               value=""
             />
           </div>
+          <br />
+          <br />
+            
+          <br />
+          <br />
           <button
             class="btn"
             data-testid="submit-button"
@@ -62,6 +74,13 @@ Object {
       >
         Log In
       </h1>
+      <button
+        class="existUser-btn"
+      >
+        <strong>
+          Exist User
+        </strong>
+      </button>
       <form
         class="center"
       >
@@ -90,6 +109,11 @@ Object {
             value=""
           />
         </div>
+        <br />
+        <br />
+          
+        <br />
+        <br />
         <button
           class="btn"
           data-testid="submit-button"

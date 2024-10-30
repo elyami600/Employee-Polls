@@ -11,6 +11,7 @@ Object {
         <ul>
           <li>
             <a
+              data-testid="home"
               href="/"
             >
               Home
@@ -18,13 +19,15 @@ Object {
           </li>
           <li>
             <a
-              href="/leaderdoard"
+              data-testid="leaderboard"
+              href="/leaderboard"
             >
-              Leaderdboard
+              Leaderboard
             </a>
           </li>
           <li>
             <a
+              data-testid="newQuestion"
               href="/add"
             >
               New Question
@@ -32,9 +35,10 @@ Object {
           </li>
           <li>
             <a
+              data-testid="login"
               href="/login"
             >
-              Loging
+              Login
             </a>
           </li>
         </ul>
@@ -48,6 +52,7 @@ Object {
       <ul>
         <li>
           <a
+            data-testid="home"
             href="/"
           >
             Home
@@ -55,13 +60,15 @@ Object {
         </li>
         <li>
           <a
-            href="/leaderdoard"
+            data-testid="leaderboard"
+            href="/leaderboard"
           >
-            Leaderdboard
+            Leaderboard
           </a>
         </li>
         <li>
           <a
+            data-testid="newQuestion"
             href="/add"
           >
             New Question
@@ -69,9 +76,10 @@ Object {
         </li>
         <li>
           <a
+            data-testid="login"
             href="/login"
           >
-            Loging
+            Login
           </a>
         </li>
       </ul>
