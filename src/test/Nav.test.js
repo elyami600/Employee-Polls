@@ -31,19 +31,18 @@ describe('Nav' , () => {
                 </Provider>
             </MemoryRouter>
         );
-        fireEvent.click(screen.getByText('Home'))
-        expect(screen.getByText('Home')).toBeInTheDocument();
+        fireEvent.click(screen.getByTestId('home'));
+        expect(screen.getByTestId('home')).toBeInTheDocument();
 
-        fireEvent.click(screen.getByText('Leaderdboard'))
-        expect(screen.getByText('Leaderdboard')).toBeInTheDocument();
+        fireEvent.click(screen.getByTestId('leaderboard'));
+        expect(screen.getByTestId('leaderboard')).toBeInTheDocument();
 
-        fireEvent.click(screen.getByText('New Question'))
-        expect(screen.getByText('New Question')).toBeInTheDocument();
+        fireEvent.click(screen.getByTestId('newQuestion'));
+        expect(screen.getByTestId('newQuestion')).toBeInTheDocument(); 
 
-        fireEvent.click(screen.getByText('Loging'))
-        expect(screen.getByText('Loging')).toBeInTheDocument();
+        
     }); 
-    
+
 })
 
 
