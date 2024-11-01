@@ -25,42 +25,36 @@ const PollAnswer = (props) => {
   const dispatch = useDispatch()
   const params = useParams();
   const id = params.id
+
   const authedUser = useSelector((state) => state.authedUser)
   const users      = useSelector((state) => state.users)
   const questions  = useSelector((state) => state.questions)
-  
+
+  const question = questions[id];
+  const author =  users[question.author];
 
   
-  //const { dispatch, id, users , authedUser, questions } = props;
   
   useEffect(() => {
-    if (!questions[id]) {
+    if (!question) {
       dispatch(setAuthedUser(null));
       navigate('/login');
     }
-  },[questions[id],dispatch, navigate])
+  }, [question, dispatch, navigate]);
 
-  if (!questions[id]) return <NotFound />;
+  if (!question) return <NotFound />;
 
-  const question = questions[id];
-  const avatar   = users[question.author].avatarURL
-  const name     = users[question.author].name
-
-  const voteOptioneOne = questions[id].optionOne.votes.includes(authedUser)
-  const voteOptioneTwo = questions[id].optionTwo.votes.includes(authedUser)
+  
+  const voteOptioneOne = question.optionOne.votes.includes(authedUser)
+  const voteOptioneTwo = question.optionTwo.votes.includes(authedUser)
   const hasVoted = voteOptioneOne || voteOptioneTwo;
 
-  const optionOneVotes = questions[id].optionOne.votes.length;
-  const optionTwoVotes = questions[id].optionTwo.votes.length;
+  const optionOneVotes = question.optionOne.votes.length;
+  const optionTwoVotes = question.optionTwo.votes.length;
 
-  const total = optionOneVotes + optionTwoVotes;
-  const optionOnePercent = Math.round(100 * (optionOneVotes / total));
-  const optionTwoPercent = Math.round(100 * (optionTwoVotes / total));
-  
-  const  optionOnePercentMax = Math.max( optionOnePercent, optionTwoPercent)
-  const  optionTwoPercentMin = Math.min( optionOnePercent, optionTwoPercent)
-
-  
+  const  totalVotes = optionOneVotes + optionTwoVotes;
+  const optionOnePercent = Math.round((optionOneVotes / totalVotes) * 100) || 0;
+  const optionTwoPercent = Math.round((optionTwoVotes / totalVotes) * 100) || 0;
 
 
   const handleOptioneOne = (e) => {
@@ -75,8 +69,8 @@ const PollAnswer = (props) => {
 
   return (
     <div className="center">
-      <h1> Poll by {name} </h1>
-      <img src={avatar} alt={`Avar of ${name}`} className="avatar" />
+      <h1> Poll by {author.name} </h1>
+      <img src={author.avatarURL} alt={`Avar of ${author.name}`} className="avatar" />
       <div>
         {!hasVoted ? (
           <div>
@@ -93,16 +87,18 @@ const PollAnswer = (props) => {
           </div> 
         ) : (
           <div>
-             <h1>You Already Voted</h1>
+             <h1>You Voted</h1>
               <div className="progress-bar">
-                <div className="progress-bar-completed" style={{ width: `${optionOnePercentMax}%` }}>
-                  <span id="progress-bar-label" className="visually-hidden">Votes: {optionOnePercentMax}%</span>
+                <label>{question.optionOne.text}</label>
+                <div className="progress-bar-completed" style={{ width: `${optionOnePercent}%` }}>
+                  <label id="progress-bar-label" className="visually-hidden"> Votes: ({optionOneVotes}) {optionOnePercent}%</label>
               </div>
             </div>
             <br></br>
             <div className="progress-bar">
-              <div className="progress-bar-completed1" style={{ width: `${optionTwoPercentMin}%` }}>
-                <span id="progress-bar-label" className="visually-hidden">Votes:  {optionTwoPercentMin}%</span>
+            <label>{question.optionTwo.text}</label>
+              <div className="progress-bar-completed" style={{ width: `${optionTwoPercent}%` }}>
+                <label id="progress-bar-label" className="visually-hidden">Votes:  ({optionTwoVotes}) {optionTwoPercent}%</label>
               </div>
             </div>
            
