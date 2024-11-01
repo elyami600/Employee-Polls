@@ -1,3 +1,17 @@
+
+## npm install
+
+Runs npm install in the project root directory to install dependencies
+
+## npm start
+
+This command starts the development server.
+Open http://localhost:3000 to view it in your browser.
+
+## npm test
+Launches the test runner in the interactive watch mode.
+It allows you to run tests selectivey and view real time results.
+
 # Employee Polls Project
 
 This is the starter code for the final assessment project for Udacity's React & Redux course.
