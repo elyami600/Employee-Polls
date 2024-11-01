@@ -11,6 +11,7 @@ import Login from './Login';
 import PollAnswer from "./PollAnswer";
 import PrivateRoute from "./PrivateRoute";
 
+
 const App = () => {
   const authedUser = useSelector((state) => state.authedUser);
   //const loading = authedUser === null;

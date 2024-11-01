@@ -8,17 +8,16 @@ const Questions = (props) => {
     console.log("Questions props ", props)
     const navigate = useNavigate();
     
-    if(props.questions === null) {
+    if(!props.question) {
         return <NotFound/>
     }
    
     const {id, name, avatar, timestamp } = props.question
 
-    const toParent = (e, id) => {
+    const handleNavigation = (e) => {
         e.preventDefault();
         navigate(`/question/${id}`);
-        
-    }
+      };
     return (
         <div className="question">
             <img src={avatar} alt={`Avar of ${name}`} className="avatar" />
@@ -27,7 +26,7 @@ const Questions = (props) => {
                     <span>{name}</span>
                     <div>{formatDate(timestamp)}</div>
                 </div>
-                <button className="show-bnt" onClick={ (e) => toParent(e,id) }>show</button>
+                <button className="show-bnt" onClick={ (e) => handleNavigation(e,id) }>show</button>
 
             </div>
 
