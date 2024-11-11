@@ -21,7 +21,7 @@ describe('NewQuestion' , () => {
         expect(component).toBeDefined();
         expect(component).toMatchSnapshot();
       });
-    
+      
     it("optionOne , optioneTwo and submit are successful in page", () => {
         render(
             <MemoryRouter>

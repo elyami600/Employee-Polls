@@ -38,7 +38,8 @@ const PollAnswer = (props) => {
   useEffect(() => {
     if (!question) {
       dispatch(setAuthedUser(null));
-      navigate('/login');
+      // navigate('/login');
+      navigate('/404');
     }
   }, [question, dispatch, navigate]);
 

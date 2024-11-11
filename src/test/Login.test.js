@@ -9,20 +9,8 @@ import { MemoryRouter } from "react-router";
 
 const store = createStore(reducers, middleware);
 
-
 describe('Login' , () => {
-    it("should render the component", () => {
-        const component = render(
-            <MemoryRouter>
-                <Provider store={store}>
-                    <Login />
-                </Provider>
-            </MemoryRouter>
-        );
-        expect(component).toBeDefined();
-        expect(component).toMatchSnapshot();
-      });
-    it("username, password, and submit are successful in page", () => {
+    const component = () => {
         render(
             <MemoryRouter>
                 <Provider store={store}>
@@ -30,49 +18,59 @@ describe('Login' , () => {
                 </Provider>
             </MemoryRouter>
         );
-        expect(screen.getByTestId('username-input')).toBeInTheDocument();
-        expect(screen.getByTestId('password-input')).toBeInTheDocument();
-        expect(screen.getByTestId('submit-button')).toBeInTheDocument();
-        expect(screen.queryByTestId('error-header')).not.toBeInTheDocument();
-       
-        // navagate to home page 
-        const button = screen.getByTestId('submit-button')
-        expect(button).toBeInTheDocument();
-        fireEvent.click(button);
-
-        fireEvent.change(screen.getByTestId('username-input'), 'mtsamis');
-        fireEvent.change(screen.getByTestId('password-input'), 'xyz123');
-        fireEvent.click(screen.getByTestId("submit-button", { name: "Submit" }));
-
-
-      
-    }); 
-    it('username and password are correct  or exist in datebase', () => {
-         render(
+    };
+ 
+    it("renders the component", () => {
+        const { container } = render(
             <MemoryRouter>
                 <Provider store={store}>
                     <Login />
                 </Provider>
             </MemoryRouter>
         );
+        expect(container).toBeDefined();
+        expect(container).toMatchSnapshot();
+    });
+
+    it("renders username, password inputs, and submit button", () => {
+        component()
+
+        expect(screen.getByTestId('username-input')).toBeInTheDocument();
+        expect(screen.getByTestId('password-input')).toBeInTheDocument();
+        expect(screen.getByTestId('submit-button')).toBeInTheDocument();
+        expect(screen.queryByTestId('error-header')).not.toBeInTheDocument();
+    });
+
+    it("submits form with valid username and password", () => {
+        component()
+       
+        const username = screen.getByTestId('username-input')
+        const password = screen.getByTestId('password-input')
+        const button   = screen.getByTestId('submit-button')
+
+        fireEvent.change(username, 'mtsamis');
+        fireEvent.change(password, 'xyz123');
+        fireEvent.click(button, { name: "Submit" });
+
+        expect(screen.queryByTestId('error-header')).not.toBeInTheDocument();
+    }); 
+
+    it("displays an error message if the username and password do not match", () => {
+        component()
+
         const username = screen.getByTestId('username-input')
         const password = screen.getByTestId('password-input')
         const button   = screen.getByTestId('submit-button')
 
         fireEvent.change(username, { target: { value: 'tylermcginnis' } });
-        fireEvent.change(password, { target: { value: 'abc321' } });
+        fireEvent.change(password, { target: { value: 'incore' } });
         fireEvent.click(button);
 
-        expect(screen.queryByTestId('error-header')).not.toBe("Error: Please ensure all fields are filled out.")
-    })
-    it('disables input when username and password are empty', () => {
-        render(
-           <MemoryRouter>
-               <Provider store={store}>
-                   <Login />
-               </Provider>
-           </MemoryRouter>
-       );
+        expect(screen.queryByTestId('error-header')).toBeInTheDocument();
+    });
+
+    it("disables submit button if username or password fields are empty", () => {
+       component()
        const username = screen.getByTestId('username-input')
        const password = screen.getByTestId('password-input')
        const button   = screen.getByTestId('submit-button')
@@ -82,28 +80,7 @@ describe('Login' , () => {
 
        expect(button).toBeDisabled();
 
-   })
-    // it('display an error messange if password is incorrect', () => {
-    // render(
-    //     <MemoryRouter>
-    //         <Provider store={store}>
-    //             <Login />
-    //         </Provider>
-    //     </MemoryRouter>
-    // );
-    // const username = screen.getByTestId('username-input')
-    // const password = screen.getByTestId('password-input')
-    // const button   = screen.getByTestId('submit-button')
-
-    // fireEvent.change(username, { target: { value: 'tylermcginnis' } });
-    // fireEvent.change(password, { target: { value: 'password' } });
-    // fireEvent.click(button);
-
-    // expect(screen.queryByTestId('error-header')).not.toBe("Error: Please ensure all fields are filled out.")
-
-    // })
-
-    
+   });
     
 })
 

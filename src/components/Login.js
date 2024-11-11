@@ -23,6 +23,11 @@ const LoginPage = ({ dispatch, users, loggedIn }) => {
         const redirectURL = params.get('redirectTo');
         return <Navigate to={redirectURL || "/"} />;
     }
+    // if (loggedIn) {
+    //     const lastVisitedURL = localStorage.getItem('lastVisitedURL');
+    //     return <Navigate to={lastVisitedURL || "/"} />;
+    // }
+
 
     // Single handler for both inputs
     const handleInputChange = (e) => {
@@ -40,7 +45,10 @@ const LoginPage = ({ dispatch, users, loggedIn }) => {
 
         if (userExists) {
             dispatch(setAuthedUser(username));
-            navigate(state?.path || "/");
+             navigate(state?.path || "/");
+            // const redirectTo = state?.path || localStorage.getItem('lastVisitedURL') || "/";
+            // navigate(redirectTo);
+            //localStorage.removeItem('lastVisitedURL');
         } else {
             setError(true);
             setUsername("");
