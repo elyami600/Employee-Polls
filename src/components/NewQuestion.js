@@ -41,32 +41,42 @@ const NewQuestion = ({ dispatch, id }) => {
 
     return (
         <div>
-            <h3 className="center">Would You Rather</h3>
-            <h4 className="center">Create Your Own Poll</h4>
-            <form className="new-question" onSubmit={handleSubmit}>
-                <label>First Option</label>
-                <br />
-                <input
-                    data-testid="optionOne-input"
-                    placeholder="Option One..."
-                    type="text"
-                    value={optionOne}
-                    onChange={handleOptionOne}
-                />
-                <br />
-                <label>Second Option</label>
-                <br />
-                <input
-                    data-testid="optionTwo-input"
-                    placeholder="Option Two..."
-                    type="text"
-                    value={optionTwo}
-                    onChange={handleOptionTwo}
-                />
-                <button data-testid="submit-button" className="btn" type="submit" disabled={optionOne === "" && optionTwo === ""}>Submit</button>
-            </form>
+          <h3 className="center">Would You Rather</h3>
+          <h4 className="center">Create Your Own Poll</h4>
+      
+          <form className="new-question" onSubmit={handleSubmit}>
+            <label htmlFor="optionOne">First Option</label>
+            <input
+              id="optionOne"
+              data-testid="optionOne-input"
+              placeholder="Option One..."
+              type="text"
+              value={optionOne}
+              onChange={handleOptionOne}
+            />
+      
+            <label htmlFor="optionTwo">Second Option</label>
+            <input
+              id="optionTwo"
+              data-testid="optionTwo-input"
+              placeholder="Option Two..."
+              type="text"
+              value={optionTwo}
+              onChange={handleOptionTwo}
+            />
+    
+            <button
+              data-testid="submit-button"
+              className="btn"
+              type="submit"
+              disabled={!optionOne && !optionTwo}
+            >
+              Submit
+            </button>
+          </form>
         </div>
-    )
+      );
+      
 }
 const mapStateToProps = ({authedUser}) => {
     return {

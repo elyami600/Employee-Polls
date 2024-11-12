@@ -3,30 +3,37 @@ import { connect } from "react-redux"
 const LeaderBoard = ({ users }) => {
     console.log("LeaderBoard props ", users)
     
-      return (
+    return (
         <div id="customers">
-            <h3 className="center">Leaderboard</h3>
-            <table  className="table_center">
+          <h3 className="center">Leaderboard</h3>
+          <table className="table_center">
             <thead>
-                <tr>
+              <tr>
                 <th>Name</th>
-                <th>Answer</th>
-                <th>Poll</th>
-                </tr>
+                <th>Answers</th>
+                <th>Polls Created</th>
+              </tr>
             </thead>
             <tbody>
-                {users.map(user => (
-                <tr key={user.id}> 
-                    <td><img src={user.avatarURL}  alt={`Avar of ${user.name}`}className="avatar" /> {user.name}</td>
-                     <td>{Object.values(user.answers).length}</td>
-                     <td>{user.questions.length}</td>
+              {users.map(user => (
+                <tr key={user.id}>
+                  <td>
+                    <img
+                      src={user.avatarURL}
+                      alt={`Avatar of ${user.name}`}
+                      className="avatar"
+                    />
+                    {user.name}
+                  </td>
+                  <td>{Object.values(user.answers).length}</td>
+                  <td>{user.questions.length}</td>
                 </tr>
-                ))}
+              ))}
             </tbody>
-            </table>
+          </table>
         </div>
-      );
-}
+    );
+}      
 const mapStateToProps = ({ users }) => {
 
     return {

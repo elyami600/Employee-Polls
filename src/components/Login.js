@@ -71,67 +71,63 @@ const LoginPage = ({ dispatch, users, loggedIn }) => {
 
     return (
         <div className="container">
-            {error && (
-                <h1 className="center" data-testid="error-header">
-                    Error: Invalid username or password.
-                </h1>
-            )}
-            
-            <h1 className="center">Log In</h1>
-            <button className="existUser-btn" onClick={toggleDropdown}><strong>Exist User</strong></button>
-           
-            <form className="center" onSubmit={handleSubmit}>
-                <div>
-                    <label>Username:</label>
-                    <input 
-                        data-testid="username-input"
-                        type="text"
-                        placeholder="username..."
-                        name="username"
-                        value={username}
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <br/>
-                <div>
-                    <label>Password:</label>
-                    <input 
-                        data-testid="password-input"
-                        type="password"
-                        placeholder="password..."
-                        name="password"
-                        value={password}
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <br/>
-                <br/>
-                {isOpen && (
-                <ul className="center">
-                    {users.map((user) => (
-                        <li key={user.id} onClick={() => handleUserSelect(user)}>
-                            {user.name}
-                        </li>
-                    ))}
-                </ul>
-            )}  <br/>
-               <br/>
-                <button
-                    data-testid="submit-button"
-                    className="btn"
-                    type="submit"
-                    disabled={!username || !password}
-                >
-                    Submit
-                </button>
-
-            </form>
+          {error && (
+            <h1 className="center" data-testid="error-header">
+              Error: Invalid username or password.
+            </h1>
+          )}
+          <h1 className="center">Log In</h1>
+          <button className="existUser-btn" onClick={toggleDropdown}>
+            <strong>Existing User</strong>
+          </button>
     
-           
-            
+          <form className="center" onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>Username:</label>
+              <input
+                data-testid="username-input"
+                type="text"
+                placeholder="username..."
+                name="username"
+                value={username}
+                onChange={handleInputChange}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Password:</label>
+              <input
+                data-testid="password-input"
+                type="password"
+                placeholder="password..."
+                name="password"
+                value={password}
+                onChange={handleInputChange}
+              />
+            </div>
+    
+            {isOpen && (
+              <ul className="center user-dropdown">
+                {users.map((user) => (
+                  <li key={user.id} onClick={() => handleUserSelect(user)}>
+                    {user.name}
+                  </li>
+                ))}
+              </ul>
+            )}
+    
+            <button
+              data-testid="submit-button"
+              className="btn"
+              type="submit"
+              disabled={!username || !password}
+            >
+              Submit
+            </button>
+          </form>
         </div>
     );
-};
+}      
 
 const mapStateToProps = ({ users, authedUser }) => ({
     users: Object.values(users),

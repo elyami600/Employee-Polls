@@ -31,19 +31,20 @@ const PollAnswer = (props) => {
   const questions  = useSelector((state) => state.questions)
 
   const question = questions[id];
-  const author =  users[question.author];
+  //const author =  users[question.author];
+  const author = question ? users[question.author] : null;
 
   
   
-  useEffect(() => {
-    if (!question) {
-      dispatch(setAuthedUser(null));
-      // navigate('/login');
-      navigate('/404');
-    }
-  }, [question, dispatch, navigate]);
+  // useEffect(() => {
+  //   if (!question || !author) {
+  //     //dispatch(setAuthedUser(null));
+  //     // navigate('/login');
+  //     navigate('/404');
+  //   }
+  // }, [question, dispatch, navigate]);
 
-  if (!question) return <NotFound />;
+  if (!questions[id]) return <NotFound />;
 
   
   const voteOptioneOne = question.optionOne.votes.includes(authedUser)
@@ -72,14 +73,17 @@ const PollAnswer = (props) => {
     <div className="center">
       <h1> Poll by {author.name} </h1>
       <img src={author.avatarURL} alt={`Avar of ${author.name}`} className="avatar" />
+
       <div>
         {!hasVoted ? (
           <div>
             <h1>Would You Rather </h1>
+
               <div>
                 <h3>{question.optionOne.text} </h3>
                 <button onClick={handleOptioneOne}>Click</button>   
               </div>
+
               <div>
                 <h3>{question.optionTwo.text} </h3>
                 <button onClick={handleOptioneTwo}>Click</button>   
@@ -89,6 +93,7 @@ const PollAnswer = (props) => {
         ) : (
           <div>
              <h1>You Voted</h1>
+             
               <div className="progress-bar">
                 <label>{question.optionOne.text}</label>
                 <div className="progress-bar-completed" style={{ width: `${optionOnePercent}%` }}>

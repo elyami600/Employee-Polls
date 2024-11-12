@@ -20,19 +20,15 @@ const Dashboard = () => {
     return optionOne.votes.includes(authedUser) || optionTwo.votes.includes(authedUser);
   });
   const unansweredQuestions = questionsIds.filter((id) => !answeredQuestions.includes(id));
-  
- 
   return (
     <div className="card-grid">
-      <button className="togle-btn" onClick={() => setShowNewQuestions(!showNewQuestions)}>
+      <button className="toggle-btn" onClick={() => setShowNewQuestions(!showNewQuestions)}>
         {showNewQuestions ? "Show Done Questions" : "Show New Questions"}
       </button>
-
+  
       {showNewQuestions ? (
-        <>
-          <h3 className="center"><strong>Unanswered polls</strong></h3>
-          <br/>
-          <br/>
+        <section className="question-section">
+          <h3 className="center"><strong>Unanswered Polls</strong></h3>
           <ul className="dashboard-list">
             {unansweredQuestions.map((id) => (
               <li key={id}>
@@ -40,13 +36,10 @@ const Dashboard = () => {
               </li>
             ))}
           </ul>
-        </>
+        </section>
       ) : (
-        <>
-
-          <h3 className="center"><strong> Answered polls</strong></h3>
-          <br/>
-          <br/>
+        <section className="question-section">
+          <h3 className="center"><strong>Answered Polls</strong></h3>
           <ul className="dashboard-list">
             {answeredQuestions.map((id) => (
               <li key={id}>
@@ -54,13 +47,13 @@ const Dashboard = () => {
               </li>
             ))}
           </ul>
-        </>
+        </section>
       )}
     </div>
   );
-};
-
-export default Dashboard
+}
+  export default Dashboard;
+  
 
 // const mapStateToProps = ({ questions, authedUser}) => ({
 
