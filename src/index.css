@@ -227,6 +227,18 @@ input[type=text] , input[type=password] :focus{
     background: #fff;
 }
 
+.existUser-btn {
+  position: absolute;
+  top: 33%;
+  right:650px;   
+  padding: 8px 16px; 
+  font-size: 16px;
+  border-radius:10px;
+  box-shadow: 0px 0px 2px 2px rgb(0,0,0);
+
+
+}
+
 
 .progress-bar {
   width: 50%;
@@ -273,17 +285,7 @@ input[type=text] , input[type=password] :focus{
 }
 
 
-.existUser-btn {
-  position: absolute;
-  top: 33%;
-  right:650px;   
-  padding: 8px 16px; 
-  font-size: 16px;
-  border-radius:10px;
-  box-shadow: 0px 0px 2px 2px rgb(0,0,0);
 
-
-}
 .togle-btn {
   position: absolute;
   top: 25%;

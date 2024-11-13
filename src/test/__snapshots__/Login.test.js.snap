@@ -14,13 +14,15 @@ exports[`Login renders the component 1`] = `
       class="existUser-btn"
     >
       <strong>
-        Exist User
+        Existing User
       </strong>
     </button>
     <form
       class="center"
     >
-      <div>
+      <div
+        class="form-group"
+      >
         <label>
           Username:
         </label>
@@ -32,8 +34,9 @@ exports[`Login renders the component 1`] = `
           value=""
         />
       </div>
-      <br />
-      <div>
+      <div
+        class="form-group"
+      >
         <label>
           Password:
         </label>
@@ -45,11 +48,6 @@ exports[`Login renders the component 1`] = `
           value=""
         />
       </div>
-      <br />
-      <br />
-        
-      <br />
-      <br />
       <button
         class="btn"
         data-testid="submit-button"

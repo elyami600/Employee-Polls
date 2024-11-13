@@ -19,23 +19,26 @@ Object {
         <form
           class="new-question"
         >
-          <label>
+          <label
+            for="optionOne"
+          >
             First Option
           </label>
-          <br />
           <input
             data-testid="optionOne-input"
+            id="optionOne"
             placeholder="Option One..."
             type="text"
             value=""
           />
-          <br />
-          <label>
+          <label
+            for="optionTwo"
+          >
             Second Option
           </label>
-          <br />
           <input
             data-testid="optionTwo-input"
+            id="optionTwo"
             placeholder="Option Two..."
             type="text"
             value=""
@@ -67,23 +70,26 @@ Object {
       <form
         class="new-question"
       >
-        <label>
+        <label
+          for="optionOne"
+        >
           First Option
         </label>
-        <br />
         <input
           data-testid="optionOne-input"
+          id="optionOne"
           placeholder="Option One..."
           type="text"
           value=""
         />
-        <br />
-        <label>
+        <label
+          for="optionTwo"
+        >
           Second Option
         </label>
-        <br />
         <input
           data-testid="optionTwo-input"
+          id="optionTwo"
           placeholder="Option Two..."
           type="text"
           value=""
